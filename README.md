@@ -1,3 +1,6 @@
+https://developers.themoviedb.org/3/movies/get-upcoming
+http://kselax.ru/en/redux-thunk-vs-redux-saga-vs-redux-promise/
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
