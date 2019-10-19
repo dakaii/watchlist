@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from 'react';
-import SearchBar from './SearchBar'
-import MovieList from './MovieList'
+// import SearchBar from './SearchBar'
+import UpcomingMovieList from './UpcomingMovieList'
 
 class App extends Component {
   render() {
     return (
       <Fragment>
         {/* <SearchBar/> */}
-        <MovieList/>
+        <UpcomingMovieList/>
       </Fragment>
     );
   }

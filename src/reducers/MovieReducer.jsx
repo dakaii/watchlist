@@ -1,45 +1,70 @@
-import { UPCOMING_MOVIES_FAILED, UPCOMING_MOVIES_REQUESTED, UPCOMING_MOVIES_SUCCEEDED, GET_CONFIG_REQUESTED, GET_CONFIG_SUCCEEDED, GET_CONFIG_FAILED } from '../actions/Types';
+import * as types from '../actions/Types';
 
 export const DEFAULT_STATE = {
     configuration: {
+        images: {
+            secure_base_url: '',
+        },
+        isLoading: false,
+    },
+    genres: {
+        genres: [],
         isLoading: false,
     },
     upcomingMovies: {
+        results: [],
         isLoading: false,
     },
 };
 
 export default (state = DEFAULT_STATE, action = {}) => {
     switch (action.type) {
-        case GET_CONFIG_REQUESTED:
+        case types.GET_CONFIG_REQUESTED:
             return {
                 ...state,
                 isLoading: true
             };
-        case GET_CONFIG_SUCCEEDED:
+        case types.GET_CONFIG_SUCCEEDED:
             return {
                 ...state,
                 configuration: action.payload,
                 isLoading: false
             };
-        case GET_CONFIG_FAILED:
+        case types.GET_CONFIG_FAILED:
             return {
                 ...state,
                 configuration: action.payload,
                 isLoading: false
             };
-        case UPCOMING_MOVIES_REQUESTED:
+        case types.GET_GENRES_REQUESTED:
             return {
                 ...state,
                 isLoading: true
             };
-        case UPCOMING_MOVIES_SUCCEEDED:
+        case types.GET_GENRES_SUCCEEDED:
+            return {
+                ...state,
+                genres: action.payload,
+                isLoading: false
+            };
+        case types.GET_GENRES_FAILED:
+            return {
+                ...state,
+                genres: action.payload,
+                isLoading: false
+            };
+        case types.UPCOMING_MOVIES_REQUESTED:
+            return {
+                ...state,
+                isLoading: true
+            };
+        case types.UPCOMING_MOVIES_SUCCEEDED:
             return {
                 ...state,
                 upcomingMovies: action.payload,
                 isLoading: false
             };
-        case UPCOMING_MOVIES_FAILED:
+        case types.UPCOMING_MOVIES_FAILED:
             return {
                 ...state,
                 upcomingMovies: action.payload,

@@ -5,7 +5,7 @@ import * as types from '../actions/Types';
 
 function* getUpcomingMovies(action) {
     const pageNum = action.params.pageNum
-    const url = `${MOVIE_DB_API_URL}movie/upcoming?api_key=${API_KEY}&language=en-US&page=${pageNum}`
+    const url = `${MOVIE_DB_API_URL}/movie/upcoming?api_key=${API_KEY}&language=en-US&page=${pageNum}`
 
     const json = yield fetch(url)
         .then(response => response.json())
@@ -14,7 +14,7 @@ function* getUpcomingMovies(action) {
 }
 
 function* getConfiguration() {
-    const url = `${MOVIE_DB_API_URL}configuration?api_key=${API_KEY}`
+    const url = `${MOVIE_DB_API_URL}/configuration?api_key=${API_KEY}`
 
     const json = yield fetch(url)
         .then(response => response.json())
@@ -22,8 +22,18 @@ function* getConfiguration() {
     yield put({ type: types.GET_CONFIG_SUCCEEDED, payload: json });
 }
 
+function* getGenres() {
+    const url = `${MOVIE_DB_API_URL}/genre/movie/list?api_key=${API_KEY}&language=en-US`
+
+    const json = yield fetch(url)
+        .then(response => response.json())
+
+    yield put({ type: types.GET_GENRES_SUCCEEDED, payload: json });
+}
+
 
 export default function* () {
     yield takeLatest(types.UPCOMING_MOVIES_REQUESTED, getUpcomingMovies)
     yield takeLatest(types.GET_CONFIG_REQUESTED, getConfiguration)
+    yield takeLatest(types.GET_GENRES_REQUESTED, getGenres)
 }

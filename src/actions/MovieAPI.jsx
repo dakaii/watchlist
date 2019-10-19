@@ -9,3 +9,8 @@ export const getConfig = (params) => ({
 	type: types.GET_CONFIG_REQUESTED,
 	params,
 });
+
+export const getGenres = (params) => ({
+	type: types.GET_GENRES_REQUESTED,
+	params,
+});
