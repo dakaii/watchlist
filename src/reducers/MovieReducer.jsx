@@ -15,6 +15,10 @@ export const DEFAULT_STATE = {
         results: [],
         isLoading: false,
     },
+    watchList: {
+        currentList: [],
+        isLoading: false,
+    },
 };
 
 export default (state = DEFAULT_STATE, action = {}) => {
@@ -68,6 +72,40 @@ export default (state = DEFAULT_STATE, action = {}) => {
             return {
                 ...state,
                 upcomingMovies: action.payload,
+                isLoading: false
+            };
+        case types.ADD_TO_WATCHLIST_REQUESTED:
+            return {
+                ...state,
+                isLoading: true
+            };
+        case types.ADD_TO_WATCHLIST_SUCCEEDED:
+            return {
+                ...state,
+                watchList: action.payload,
+                isLoading: false
+            };
+        case types.ADD_TO_WATCHLIST_FAILED:
+            return {
+                ...state,
+                watchList: action.payload,
+                isLoading: false
+            };
+        case types.REMOVE_FROM_WATCHLIST_REQUESTED:
+            return {
+                ...state,
+                isLoading: true
+            };
+        case types.REMOVE_FROM_WATCHLIST_SUCCEEDED:
+            return {
+                ...state,
+                watchList: action.payload,
+                isLoading: false
+            };
+        case types.REMOVE_FROM_WATCHLIST_FAILED:
+            return {
+                ...state,
+                watchList: action.payload,
                 isLoading: false
             };
         default:

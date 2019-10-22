@@ -3,8 +3,20 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
+import { Button } from '@material-ui/core';
 
-export default ({ movie, imgUrl, genres }) => {
+
+export default ({ movie, alreadyBookmarked = [], imgUrl, genres, addAction, removeAction }) => {
+    let button;
+    const bookmarkedTitles = alreadyBookmarked.map(m => m.original_title)
+
+    if (addAction && bookmarkedTitles.includes(movie.original_title)) {
+        button = <Button color="primary" disabled>Already Added to WatchList</Button>;
+    } else if (addAction) {
+        button = <Button color="primary" onClick={() => { addAction({ movie }); }}>Add to WatchList</Button>
+    } else if (removeAction) {
+        button = <Button color="secondary" onClick={() => { removeAction({ movie }); }}>Remove from WatchList</Button>
+    }
 
     return (
         <Paper>
@@ -28,10 +40,11 @@ export default ({ movie, imgUrl, genres }) => {
                         Release date: {movie.release_date}
                     </Typography>
                     <Typography style={styles.text}>
-                        Genres: { movie.genre_ids.map(genre_id => (
-                            genres.get(genre_id) + "\n" 
+                        Genres: {movie.genre_ids.map(genre_id => (
+                            genres.get(genre_id) + ' '
                         ))}
                     </Typography>
+                    {button}
                 </Grid>
             </Grid>
         </Paper>
